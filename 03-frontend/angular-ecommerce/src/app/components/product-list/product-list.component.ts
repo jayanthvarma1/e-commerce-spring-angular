@@ -10,6 +10,8 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
+  // now search for products using that keyword
+
   products: Product[] = [];
   currentCategoryId: number = 1;
   previousCategoryId: number = 1;
@@ -122,5 +124,15 @@ export class ProductListComponent implements OnInit {
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     };
+  }
+
+  addToCart(theProduct: Product) {
+    console.log(
+      `Adding the product to cart: ${theProduct.name}, ${theProduct.unitPrice}`
+    );
+
+    // Instead of console logging, implement the functionality to add the product to the cart.
+    // 1. Create a method. that takes the input of the product and calls the backend service to
+    // add the products onto the cart.
   }
 }
