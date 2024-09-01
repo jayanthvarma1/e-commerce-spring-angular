@@ -16,10 +16,33 @@ export class CartService {
   addToCart(theCartItem: CartItem) {
     // Check if we already have the item in our cart
     let alreadyExistsInCart: boolean = false;
-    let existingCartItem: CartItem | undefined = undefined;
+    let existingCartItem: CartItem = undefined!;
 
-    // Find the item in the cart based on item id
+    if (this.cartItems.length > 0) {
+      // Find the item in the cart based on item id
+      for (let tempCartItem of this.cartItems) {
+        if (tempCartItem.id === theCartItem.id) {
+          existingCartItem = tempCartItem;
+          break;
+        }
+      }
 
-    // Check if we fount it
+      // Check if we found it
+      alreadyExistsInCart = existingCartItem != undefined;
+    }
+
+    if (alreadyExistsInCart) {
+      existingCartItem.quantity++;
+    } else {
+      // Just add the item to the array
+      this.cartItems.push(theCartItem);
+    }
+
+    // compute cart total price and total quantity
+    this.computeCartTotals();
+  }
+
+  computeCartTotals() {
+    throw new Error('Method not implemented.');
   }
 }
